@@ -1,0 +1,40 @@
+# 12 October 2026: bell_modal, a church or handbell partial set (hum 0.5, prime 1, minor tierce 1.183, quint 1.506,
+# nominal 2, then 2.514, 2.662, 3.011), with a hum level, tilt and damping. Ratios from bell acoustics (Rossing and
+# Perrin), derived from the published measurements. FR : cloche d'église ou clochette, partiels mesurés.
+import math
+
+import torch
+
+from zrmd.audio.bank import Block, db_to_amp, envelope, stft_filter
+from zrmd.audio import fxdsp as F
+from zrmd.audio.fxdsp import param as P
+
+META = {"family": "modal", "kind": "source",
+        "description": "Bell partials hum 0.5, prime 1, tierce 1.183, quint 1.506, nominal 2 and upper partials, with hum level, tilt and damping. Bells, success chimes. (12 October 2026)",
+        "tags": ["tonal", "modal", "bell", "church", "chime", "inharmonic"],
+        "sources": [{"what": "bell partial ratios", "url": None, "reference": "T. Rossing and R. Perrin, Vibrations of bells, Applied Acoustics 20, 1987", "licence": F.SOURCE}],
+        "licence": "original"}
+RATIOS = [1.0, 1.183, 1.506, 2.0, 2.514, 2.662, 3.011]
+
+
+class BellModal(Block):
+    ID = "bell_modal"
+    PARAMS = [
+        P("f0_hz", "Hz", 80, 4000, 523, "log", "prime (strike) partial"),
+        P("hum_db", "dB", -40, 0, -6, "lin", "level of the hum, an octave under the prime"),
+        P("tilt", "exponent", 0.0, 2.5, 0.6, "lin", "partial gain ratio**-tilt"),
+        P("decay_s", "s (T60)", 0.2, 8.0, 3.0, "log", "decay of the prime"),
+        P("damp", "exponent", 0.0, 2.0, 0.8, "lin", "partial decay decay_s / ratio**damp"),
+        P("amp_db", "dBFS", -60, 0, -12, "lin", "peak level"),
+        P("onset_s", "s", 0.0, 0.25, 0.02, "lin", "start time in the window"),
+        P("attack_s", "s", 0.0005, 0.05, 0.001, "log", "linear attack"),
+    ]
+
+    def synth(self, v, t, sr):
+        freqs = [v["f0_hz"] * 0.5] + [v["f0_hz"] * r for r in RATIOS]
+        gains = [db_to_amp(v["hum_db"])] + [r ** (-v["tilt"]) for r in RATIOS]
+        decays = [v["decay_s"] * 1.4] + [v["decay_s"] / r ** v["damp"] for r in RATIOS]
+        return F.amp(v) * F.partials(t, sr, freqs, gains, decays, v["onset_s"], v["attack_s"]) / sum(gains)
+
+
+BLOCK = BellModal

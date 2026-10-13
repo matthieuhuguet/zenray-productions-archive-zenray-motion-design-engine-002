@@ -1,0 +1,98 @@
+{
+  "id": "sdf_smooth_union",
+  "family": "mask",
+  "description": "Two discs merged by a polynomial smooth minimum (metaball-like blend radius k). Mask block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center_a",
+      "type": "vec2",
+      "default": [
+        0.38,
+        0.5
+      ],
+      "min": [
+        0.2,
+        0.2
+      ],
+      "max": [
+        0.8,
+        0.8
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius_a",
+      "type": "float",
+      "default": 0.16,
+      "min": 0.05,
+      "max": 0.25,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "center_b",
+      "type": "vec2",
+      "default": [
+        0.64,
+        0.5
+      ],
+      "min": [
+        0.2,
+        0.2
+      ],
+      "max": [
+        0.8,
+        0.8
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius_b",
+      "type": "float",
+      "default": 0.12,
+      "min": 0.05,
+      "max": 0.25,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "k",
+      "type": "float",
+      "default": 0.08,
+      "min": 0.005,
+      "max": 0.2,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "soft",
+      "type": "float",
+      "default": 0.004,
+      "min": 0.001,
+      "max": 0.03,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "sdf",
+    "smooth-union",
+    "smin",
+    "metaball",
+    "blob",
+    "operator",
+    "mask"
+  ],
+  "looks": [
+    "blob",
+    "liquid",
+    "merge"
+  ]
+}

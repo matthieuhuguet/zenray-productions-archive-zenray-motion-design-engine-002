@@ -1,0 +1,80 @@
+{
+  "id": "sdf_ngon",
+  "family": "mask",
+  "description": "Regular polygon coverage (3 to 9 sides, floor of 'sides'), circumradius and rotation, sector-folded distance. Mask block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.3,
+      "min": 0.08,
+      "max": 0.42,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "sides",
+      "type": "float",
+      "default": 6.0,
+      "min": 3.0,
+      "max": 9.0,
+      "unit": "count (floored)"
+    },
+    {
+      "name": "rotation",
+      "type": "float",
+      "default": 0.0,
+      "min": -180.0,
+      "max": 180.0,
+      "unit": "degrees"
+    },
+    {
+      "name": "soft",
+      "type": "float",
+      "default": 0.004,
+      "min": 0.001,
+      "max": 0.03,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "sdf",
+    "polygon",
+    "hexagon",
+    "triangle",
+    "ngon",
+    "mask"
+  ],
+  "looks": [
+    "badge",
+    "icon",
+    "geometric"
+  ]
+}

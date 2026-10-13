@@ -1,0 +1,116 @@
+{
+  "id": "chip_blip",
+  "family": "ui",
+  "description": "Chip blip: a band-limited pulse wave playing up to three discrete pitches in a row, with per-note and overall decay. (12 October 2026)",
+  "tags": [
+    "ui",
+    "blip",
+    "chip",
+    "8bit",
+    "arpeggio",
+    "coin",
+    "pickup",
+    "pulse"
+  ],
+  "sources": [
+    {
+      "what": "Fourier series of a pulse wave with stepped pitch",
+      "url": null,
+      "licence": "original (derived from the mathematics, no code copied)"
+    }
+  ],
+  "licence": "original",
+  "params": [
+    {
+      "name": "f0_hz",
+      "unit": "Hz",
+      "min": 100.0,
+      "max": 4000.0,
+      "default": 880.0,
+      "scale": "log",
+      "description": "pitch of the first note"
+    },
+    {
+      "name": "step1_st",
+      "unit": "semitones",
+      "min": -24.0,
+      "max": 24.0,
+      "default": 7.0,
+      "scale": "lin",
+      "description": "second note relative to the first"
+    },
+    {
+      "name": "step2_st",
+      "unit": "semitones",
+      "min": -24.0,
+      "max": 24.0,
+      "default": 12.0,
+      "scale": "lin",
+      "description": "third note relative to the first"
+    },
+    {
+      "name": "step_s",
+      "unit": "s",
+      "min": 0.015,
+      "max": 0.3,
+      "default": 0.06,
+      "scale": "log",
+      "description": "length of each note"
+    },
+    {
+      "name": "notes",
+      "unit": "notes",
+      "min": 1.0,
+      "max": 3.0,
+      "default": 2.0,
+      "scale": "lin",
+      "description": "number of notes (continuous)"
+    },
+    {
+      "name": "duty",
+      "unit": "fraction",
+      "min": 0.05,
+      "max": 0.5,
+      "default": 0.25,
+      "scale": "lin",
+      "description": "pulse width"
+    },
+    {
+      "name": "note_decay_s",
+      "unit": "s (T60)",
+      "min": 0.02,
+      "max": 2.0,
+      "default": 0.4,
+      "scale": "log",
+      "description": "decay inside each note"
+    },
+    {
+      "name": "decay_s",
+      "unit": "s (T60)",
+      "min": 0.03,
+      "max": 3.0,
+      "default": 0.5,
+      "scale": "log",
+      "description": "decay of the whole blip"
+    },
+    {
+      "name": "amp_db",
+      "unit": "dBFS",
+      "min": -60.0,
+      "max": 0.0,
+      "default": -16.0,
+      "scale": "lin",
+      "description": "peak level of the main layer"
+    },
+    {
+      "name": "onset_s",
+      "unit": "s",
+      "min": 0.0,
+      "max": 0.25,
+      "default": 0.02,
+      "scale": "lin",
+      "description": "start time in the window"
+    }
+  ],
+  "date": "12 October 2026"
+}

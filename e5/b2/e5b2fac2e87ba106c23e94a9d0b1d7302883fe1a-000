@@ -1,0 +1,43 @@
+# 12 October 2026: chorus, two voices read through a time-varying fractional delay d(t) = base + depth (1 + sin(2 pi
+# rate t + phase)) / 2 (linear interpolation, gradient into rate, depth and base), phases 0 and pi, mixed with the dry
+# signal. FR : chorus à deux voix, retard modulé, interpolation linéaire.
+import math
+
+import torch
+
+from zrmd.audio.bank import db_to_amp, stft_filter
+from zrmd.audio import fxdsp as F
+from zrmd.audio.fxdsp import EffectBlock
+from zrmd.audio.fxdsp import param as P
+
+META = {"family": "modulation", "kind": "effect",
+        "description": "Two-voice chorus: sine modulated fractional delays (rate, depth, base delay, mix). Thickening, detune, shimmer, vibrato at full mix. (12 October 2026)",
+        "tags": ["effect", "modulation", "chorus", "detune", "vibrato"],
+        "sources": [{"what": "modulated delay line", "url": None, "licence": F.SOURCE}],
+        "licence": "original"}
+
+
+class Chorus(EffectBlock):
+    ID = "chorus"
+    # 12 October 2026 (A2): fit hints measured on the failed cases of the first A2 verification (docs/build/
+    # A2-tonal-effects.md): a larger search budget (second pass: finer scans, which a pitch basin of
+    # about 0.07 semitone at the third partial needs, and a larger evolution strategy), and coupled groups for the evolution strategy. FR : indications.
+    FIT = {"scanRounds": 6, "starts": 12, "screenSamples": 1024, "esSamples": 80, "esIters": 20, "polishRounds": 24, "scanPoints": 129, "scanZoomPoints": 33,
+           "scanGroups": [["rate_hz", "depth_ms"], ["base_ms", "depth_ms"], ["mix", "out_db"], "*"]}
+    PARAMS = [
+        P("rate_hz", "Hz", 0.1, 6.0, 1.2, "log", "modulation rate"),
+        P("depth_ms", "ms", 0.2, 8.0, 3.0, "log", "modulation depth"),
+        P("base_ms", "ms", 5.0, 30.0, 12.0, "lin", "minimum delay"),
+        P("mix", "0..1", 0.0, 1.0, 0.5, "lin", "wet share"),
+        P("out_db", "dB", -24, 12, 0, "lin", "output gain"),
+    ]
+
+    def fx(self, v, x, t, sr):
+        wet = torch.zeros_like(x)
+        for ph in (0.0, math.pi):
+            d = (v["base_ms"] + v["depth_ms"] * 0.5 * (1.0 + torch.sin(F.TWO_PI * v["rate_hz"] * t + ph))) * 1e-3 * sr
+            wet = wet + 0.5 * F.frac_delay_time(x, d)
+        return db_to_amp(v["out_db"]) * ((1.0 - v["mix"]) * x + v["mix"] * wet)
+
+
+BLOCK = Chorus

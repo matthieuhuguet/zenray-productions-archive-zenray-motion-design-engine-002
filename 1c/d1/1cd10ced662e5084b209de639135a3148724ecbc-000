@@ -1,0 +1,64 @@
+{
+  "id": "sdf_circle",
+  "family": "mask",
+  "description": "Disc coverage from the exact circle distance, soft smoothstep edge. Mask block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.3,
+      "min": 0.05,
+      "max": 0.45,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "soft",
+      "type": "float",
+      "default": 0.004,
+      "min": 0.001,
+      "max": 0.03,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "sdf",
+    "circle",
+    "disc",
+    "dot",
+    "mask"
+  ],
+  "looks": [
+    "dot",
+    "orb-mask",
+    "button",
+    "bokeh"
+  ]
+}

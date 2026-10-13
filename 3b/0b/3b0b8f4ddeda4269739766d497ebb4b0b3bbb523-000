@@ -1,0 +1,73 @@
+{
+  "id": "sdf_ring",
+  "family": "mask",
+  "description": "Annulus coverage: absolute circle distance minus a half thickness (onion of a circle). Mask block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.3,
+      "min": 0.08,
+      "max": 0.42,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "thickness",
+      "type": "float",
+      "default": 0.03,
+      "min": 0.004,
+      "max": 0.08,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "soft",
+      "type": "float",
+      "default": 0.004,
+      "min": 0.001,
+      "max": 0.03,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "sdf",
+    "ring",
+    "annulus",
+    "outline",
+    "onion",
+    "mask"
+  ],
+  "looks": [
+    "ring",
+    "loader",
+    "halo-mask",
+    "outline"
+  ]
+}

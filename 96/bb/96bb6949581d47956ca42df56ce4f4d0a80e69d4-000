@@ -1,0 +1,94 @@
+{
+  "id": "clap",
+  "family": "drum",
+  "description": "Hand clap: four band-passed noise bursts spaced by a few milliseconds, then a decaying tail. (12 October 2026)",
+  "tags": [
+    "drum",
+    "clap",
+    "transient",
+    "noise"
+  ],
+  "sources": [
+    {
+      "what": "burst train of filtered noise",
+      "url": null,
+      "licence": "original (derived from the mathematics, no code copied)"
+    }
+  ],
+  "licence": "original",
+  "params": [
+    {
+      "name": "center_hz",
+      "unit": "Hz",
+      "min": 500.0,
+      "max": 6000.0,
+      "default": 1400.0,
+      "scale": "log",
+      "description": "band centre"
+    },
+    {
+      "name": "bw_oct",
+      "unit": "octaves",
+      "min": 0.5,
+      "max": 5.0,
+      "default": 2.0,
+      "scale": "log",
+      "description": "band width"
+    },
+    {
+      "name": "spread_ms",
+      "unit": "ms",
+      "min": 3.0,
+      "max": 25.0,
+      "default": 10.0,
+      "scale": "log",
+      "description": "spacing of the bursts"
+    },
+    {
+      "name": "burst_decay_s",
+      "unit": "s (T60)",
+      "min": 0.003,
+      "max": 0.05,
+      "default": 0.012,
+      "scale": "log",
+      "description": "decay of each burst"
+    },
+    {
+      "name": "tail_decay_s",
+      "unit": "s (T60)",
+      "min": 0.05,
+      "max": 1.0,
+      "default": 0.25,
+      "scale": "log",
+      "description": "decay of the tail"
+    },
+    {
+      "name": "tail_db",
+      "unit": "dB re bursts",
+      "min": -30.0,
+      "max": 0.0,
+      "default": -8.0,
+      "scale": "lin",
+      "description": "tail level"
+    },
+    {
+      "name": "amp_db",
+      "unit": "dBFS",
+      "min": -60.0,
+      "max": 0.0,
+      "default": -12.0,
+      "scale": "lin",
+      "description": "peak level of the main layer"
+    },
+    {
+      "name": "onset_s",
+      "unit": "s",
+      "min": 0.0,
+      "max": 0.2,
+      "default": 0.02,
+      "scale": "lin",
+      "description": "start time in the window"
+    }
+  ],
+  "date": "12 October 2026"
+}

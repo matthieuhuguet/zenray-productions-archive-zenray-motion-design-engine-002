@@ -1,0 +1,43 @@
+# 12 October 2026: bass_saw, a polyBLEP saw through a resonant lowpass whose cutoff falls exponentially from
+# cutoff_start_hz to cutoff_end_hz (the filter envelope of acid and synth basses). FR : basse en dent de scie.
+import math
+
+import torch
+
+from zrmd.audio.bank import Block, db_to_amp, envelope, stft_filter
+from zrmd.audio import fxdsp as F
+from zrmd.audio.fxdsp import param as P
+
+META = {"family": "bass", "kind": "source",
+        "description": "polyBLEP saw through a resonant lowpass with an exponential filter envelope. Synth bass, acid plucks, low stabs. (12 October 2026)",
+        "tags": ["tonal", "bass", "saw", "acid", "pluck", "subtractive"],
+        "sources": [{"what": "polyBLEP oscillator", "url": None, "reference": "Valimaki and Huovilainen 2007", "licence": F.SOURCE}, F.RBJ],
+        "licence": "original"}
+
+
+class BassSaw(Block):
+    ID = "bass_saw"
+    PARAMS = [
+        P("f0_hz", "Hz", 30, 400, 55, "log", "pitch"),
+        P("cutoff_start_hz", "Hz", 100, 8000, 2500, "log", "cutoff at the onset"),
+        P("cutoff_end_hz", "Hz", 40, 2000, 250, "log", "cutoff reached"),
+        P("filter_decay_s", "s", 0.01, 1.5, 0.15, "log", "filter envelope time constant"),
+        P("q", "Q", 0.5, 8.0, 2.0, "log", "resonance"),
+        P("decay_s", "s (T60)", 0.1, 4.0, 0.9, "log", "time to fall 60 dB"),
+        P("amp_db", "dBFS", -60, 0, -12, "lin", "peak level"),
+        P("onset_s", "s", 0.0, 0.25, 0.02, "lin", "start time in the window"),
+    ]
+
+    def synth(self, v, t, sr):
+        y = F.saw(v["f0_hz"] * torch.ones_like(t), sr, 0.0)
+
+        def mask(fr, tm):
+            k = torch.exp(-torch.clamp(tm - v["onset_s"], min=0.0) / v["filter_decay_s"])
+            fc = v["cutoff_end_hz"] * torch.pow(v["cutoff_start_hz"] / v["cutoff_end_hz"], k)
+            return F.biquad_mag("lowpass", fr, fc, v["q"], sr=sr)
+
+        y = stft_filter(y, mask, 1024, 256, sr)
+        return F.amp(v) * envelope(t, v["onset_s"], torch.tensor(0.002), v["decay_s"]) * y
+
+
+BLOCK = BassSaw

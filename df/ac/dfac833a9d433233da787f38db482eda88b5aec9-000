@@ -1,0 +1,17 @@
+{
+  "id": "sdf_rounded_rect",
+  "family": "mask",
+  "description": "Rounded rectangle coverage with a soft smoothstep edge, from an exact signed distance. Mask block: vec4(1, 1, 1, coverage). (12 October 2026)",
+  "params": [
+    {"name": "center", "type": "vec2", "default": [0.5, 0.5], "min": [0.0, 0.0], "max": [1.0, 1.0], "unit": "uv"},
+    {"name": "half_size", "type": "vec2", "default": [0.3, 0.2], "min": [0.02, 0.02], "max": [0.5, 0.5], "unit": "uv (height units)"},
+    {"name": "radius", "type": "float", "default": 0.06, "min": 0.0, "max": 0.25, "unit": "uv (height units)"},
+    {"name": "soft", "type": "float", "default": 0.004, "min": 0.001, "max": 0.1, "unit": "uv (height units)"},
+    {"name": "aspect", "type": "float", "default": 1.0, "min": 0.25, "max": 4.0, "unit": "width / height"}
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics of the box signed distance), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": ["sdf", "shape", "rounded", "mask", "card", "button"],
+  "looks": ["card", "device-screen", "pill", "panel"]
+}

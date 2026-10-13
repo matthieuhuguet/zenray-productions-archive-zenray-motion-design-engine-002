@@ -1,0 +1,123 @@
+{
+  "id": "radial_gradient3",
+  "family": "gradient",
+  "description": "Three-stop radial gradient from a centre (sRGB mixing), clamped beyond the radius. Colour block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.6,
+      "min": 0.15,
+      "max": 1.0,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "c0",
+      "type": "color",
+      "default": [
+        1.0,
+        0.85,
+        0.6
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unit": "sRGB 0..1"
+    },
+    {
+      "name": "c1",
+      "type": "color",
+      "default": [
+        0.85,
+        0.35,
+        0.55
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unit": "sRGB 0..1"
+    },
+    {
+      "name": "c2",
+      "type": "color",
+      "default": [
+        0.05,
+        0.03,
+        0.12
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unit": "sRGB 0..1"
+    },
+    {
+      "name": "s1",
+      "type": "float",
+      "default": 0.4,
+      "min": 0.05,
+      "max": 0.95,
+      "unit": "ramp position"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "gradient",
+    "radial",
+    "background",
+    "spotlight",
+    "colour"
+  ],
+  "looks": [
+    "background-gradient",
+    "spotlight",
+    "orb-body"
+  ]
+}

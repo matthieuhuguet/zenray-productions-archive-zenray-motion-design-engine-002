@@ -1,0 +1,80 @@
+{
+  "id": "sdf_superellipse",
+  "family": "mask",
+  "description": "Superellipse (squircle) coverage |x/a|^n + |y/b|^n = 1, distance approximated by the scaled norm. Mask block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "half_size",
+      "type": "vec2",
+      "default": [
+        0.3,
+        0.3
+      ],
+      "min": [
+        0.08,
+        0.08
+      ],
+      "max": [
+        0.4,
+        0.4
+      ],
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "exponent",
+      "type": "float",
+      "default": 4.0,
+      "min": 1.5,
+      "max": 8.0,
+      "unit": "n"
+    },
+    {
+      "name": "soft",
+      "type": "float",
+      "default": 0.004,
+      "min": 0.001,
+      "max": 0.03,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "sdf",
+    "superellipse",
+    "squircle",
+    "app-icon",
+    "mask"
+  ],
+  "looks": [
+    "app-icon",
+    "card",
+    "device-screen"
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "id": "metal_ring_tint",
+  "family": "light",
+  "description": "Flat metal ring shaded as a tube: Lambert with ambient plus Blinn specular with Schlick fresnel whose F0 is the metal tint (PBR-ish). Colour block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.3,
+      "min": 0.1,
+      "max": 0.4,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "thickness",
+      "type": "float",
+      "default": 0.04,
+      "min": 0.01,
+      "max": 0.08,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "metal",
+      "type": "color",
+      "default": [
+        0.95,
+        0.75,
+        0.45
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unit": "sRGB 0..1"
+    },
+    {
+      "name": "light_angle",
+      "type": "float",
+      "default": -135.0,
+      "min": -180.0,
+      "max": 180.0,
+      "unit": "degrees (azimuth)"
+    },
+    {
+      "name": "elevation",
+      "type": "float",
+      "default": 40.0,
+      "min": 10.0,
+      "max": 80.0,
+      "unit": "degrees"
+    },
+    {
+      "name": "shininess",
+      "type": "float",
+      "default": 40.0,
+      "min": 4.0,
+      "max": 128.0,
+      "unit": "Blinn exponent"
+    },
+    {
+      "name": "ambient",
+      "type": "float",
+      "default": 0.25,
+      "min": 0.0,
+      "max": 0.6,
+      "unit": "level"
+    },
+    {
+      "name": "soft",
+      "type": "float",
+      "default": 0.004,
+      "min": 0.001,
+      "max": 0.03,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "metal",
+    "pbr",
+    "ring",
+    "bezel",
+    "specular",
+    "fresnel",
+    "light",
+    "colour"
+  ],
+  "looks": [
+    "metal-rim",
+    "device-bezel",
+    "watch-ring",
+    "coin-edge"
+  ]
+}

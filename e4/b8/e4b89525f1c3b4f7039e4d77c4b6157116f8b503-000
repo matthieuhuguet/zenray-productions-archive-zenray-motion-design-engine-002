@@ -1,0 +1,103 @@
+{
+  "id": "radial_oklab2",
+  "family": "gradient",
+  "description": "Radial two-colour gradient interpolated in OKLab with a power falloff exponent. Colour block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.6,
+      "min": 0.15,
+      "max": 1.0,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "c0",
+      "type": "color",
+      "default": [
+        1.0,
+        0.8,
+        0.5
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unit": "sRGB 0..1"
+    },
+    {
+      "name": "c1",
+      "type": "color",
+      "default": [
+        0.1,
+        0.05,
+        0.3
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unit": "sRGB 0..1"
+    },
+    {
+      "name": "falloff",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.4,
+      "max": 3.0,
+      "unit": "exponent"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "https://bottosson.github.io/posts/oklab/",
+  "licence": "original (implemented from the published OKLab matrices of Bjorn Ottosson, 2020, https://bottosson.github.io/posts/oklab/; matrices are numeric constants, no code copied), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "gradient",
+    "radial",
+    "oklab",
+    "perceptual",
+    "colour"
+  ],
+  "looks": [
+    "orb-body",
+    "spotlight",
+    "background-gradient"
+  ]
+}

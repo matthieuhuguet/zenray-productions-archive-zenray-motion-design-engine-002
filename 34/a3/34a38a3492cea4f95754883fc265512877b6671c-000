@@ -1,0 +1,88 @@
+{
+  "id": "sdf_arc",
+  "family": "mask",
+  "description": "Circular arc stroke with round caps from a start angle over a span, exact distance (ring inside the span, end points outside). Mask block. (12 October 2026)",
+  "params": [
+    {
+      "name": "center",
+      "type": "vec2",
+      "default": [
+        0.5,
+        0.5
+      ],
+      "min": [
+        0.25,
+        0.25
+      ],
+      "max": [
+        0.75,
+        0.75
+      ],
+      "unit": "uv"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.3,
+      "min": 0.1,
+      "max": 0.4,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "thickness",
+      "type": "float",
+      "default": 0.025,
+      "min": 0.005,
+      "max": 0.06,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "start",
+      "type": "float",
+      "default": -90.0,
+      "min": -180.0,
+      "max": 180.0,
+      "unit": "degrees (0 = right, 90 = down)"
+    },
+    {
+      "name": "span",
+      "type": "float",
+      "default": 270.0,
+      "min": 20.0,
+      "max": 340.0,
+      "unit": "degrees"
+    },
+    {
+      "name": "soft",
+      "type": "float",
+      "default": 0.004,
+      "min": 0.001,
+      "max": 0.03,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "sdf",
+    "arc",
+    "progress",
+    "gauge",
+    "stroke",
+    "mask"
+  ],
+  "looks": [
+    "progress-ring",
+    "gauge",
+    "loader"
+  ]
+}

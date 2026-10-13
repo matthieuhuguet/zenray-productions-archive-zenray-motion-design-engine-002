@@ -1,0 +1,39 @@
+# 12 October 2026: chime_bar, the free-free bar (tubular chime, glockenspiel) whose bending modes sit at the
+# Euler-Bernoulli ratios 1, 2.756, 5.404, 8.933, 13.344, with tilt and frequency dependent damping.
+# Ratios from the beam equation (Rossing, The Science of Sound), derived from the mathematics. FR : barre libre.
+import math
+
+import torch
+
+from zrmd.audio.bank import Block, db_to_amp, envelope, stft_filter
+from zrmd.audio import fxdsp as F
+from zrmd.audio.fxdsp import param as P
+
+META = {"family": "modal", "kind": "source",
+        "description": "Free-free bar modes at the Euler-Bernoulli ratios 1, 2.756, 5.404, 8.933, 13.344. Chimes, glockenspiel, metallophone hits. (12 October 2026)",
+        "tags": ["tonal", "modal", "chime", "glockenspiel", "metallic", "inharmonic"],
+        "sources": [{"what": "free-free beam mode ratios", "url": None, "reference": "T. Rossing, The Science of Sound, chapter on bars", "licence": F.SOURCE}],
+        "licence": "original"}
+RATIOS = [1.0, 2.756, 5.404, 8.933, 13.344]
+
+
+class ChimeBar(Block):
+    ID = "chime_bar"
+    PARAMS = [
+        P("f0_hz", "Hz", 150, 6000, 1046, "log", "lowest mode"),
+        P("tilt", "exponent", 0.0, 3.0, 1.0, "lin", "mode gain ratio**-tilt"),
+        P("decay_s", "s (T60)", 0.1, 8.0, 2.5, "log", "decay of the lowest mode"),
+        P("damp", "exponent", 0.0, 2.0, 1.0, "lin", "mode decay decay_s / ratio**damp"),
+        P("amp_db", "dBFS", -60, 0, -12, "lin", "peak level"),
+        P("onset_s", "s", 0.0, 0.25, 0.02, "lin", "start time in the window"),
+        P("attack_s", "s", 0.0005, 0.05, 0.001, "log", "linear attack"),
+    ]
+
+    def synth(self, v, t, sr):
+        freqs = [v["f0_hz"] * r for r in RATIOS]
+        gains = [r ** (-v["tilt"]) for r in RATIOS]
+        decays = [v["decay_s"] / r ** v["damp"] for r in RATIOS]
+        return F.amp(v) * F.partials(t, sr, freqs, gains, decays, v["onset_s"], v["attack_s"]) / sum(gains)
+
+
+BLOCK = ChimeBar

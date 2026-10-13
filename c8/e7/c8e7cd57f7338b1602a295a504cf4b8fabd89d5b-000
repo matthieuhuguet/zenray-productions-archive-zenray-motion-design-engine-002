@@ -1,0 +1,91 @@
+{
+  "id": "vignette_rounded_rect",
+  "family": "light",
+  "description": "Rounded rectangle vignette as a multiplier, following the frame shape: smoothstep(-falloff, falloff, box distance). Colour block for multiply. (12 October 2026)",
+  "params": [
+    {
+      "name": "half_size",
+      "type": "vec2",
+      "default": [
+        0.42,
+        0.38
+      ],
+      "min": [
+        0.2,
+        0.2
+      ],
+      "max": [
+        0.48,
+        0.48
+      ],
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "default": 0.15,
+      "min": 0.0,
+      "max": 0.25,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "falloff",
+      "type": "float",
+      "default": 0.1,
+      "min": 0.01,
+      "max": 0.25,
+      "unit": "uv (height units)"
+    },
+    {
+      "name": "amount",
+      "type": "float",
+      "default": 0.7,
+      "min": 0.0,
+      "max": 1.0,
+      "unit": "strength"
+    },
+    {
+      "name": "tint",
+      "type": "color",
+      "default": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "unit": "sRGB 0..1"
+    },
+    {
+      "name": "aspect",
+      "type": "float",
+      "default": 1.0,
+      "min": 0.5,
+      "max": 2.0,
+      "unit": "width / height"
+    }
+  ],
+  "source_url": "",
+  "licence": "original (written from the mathematics), same licence as the engine",
+  "attribution": "ZenRay Motion Design, 12 October 2026",
+  "tags": [
+    "vignette",
+    "frame",
+    "multiply",
+    "darken",
+    "colour"
+  ],
+  "looks": [
+    "vignette",
+    "frame-shade",
+    "screen-edge"
+  ]
+}

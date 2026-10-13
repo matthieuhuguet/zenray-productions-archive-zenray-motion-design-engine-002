@@ -1,0 +1,98 @@
+{
+  "id": "bell_modal",
+  "family": "modal",
+  "kind": "source",
+  "description": "Bell partials hum 0.5, prime 1, tierce 1.183, quint 1.506, nominal 2 and upper partials, with hum level, tilt and damping. Bells, success chimes. (12 October 2026)",
+  "tags": [
+    "tonal",
+    "modal",
+    "bell",
+    "church",
+    "chime",
+    "inharmonic"
+  ],
+  "sources": [
+    {
+      "what": "bell partial ratios",
+      "url": null,
+      "reference": "T. Rossing and R. Perrin, Vibrations of bells, Applied Acoustics 20, 1987",
+      "licence": "original (derived from the published mathematics, no code copied)"
+    }
+  ],
+  "licence": "original",
+  "params": [
+    {
+      "name": "f0_hz",
+      "unit": "Hz",
+      "min": 80.0,
+      "max": 4000.0,
+      "default": 523.0,
+      "scale": "log",
+      "description": "prime (strike) partial"
+    },
+    {
+      "name": "hum_db",
+      "unit": "dB",
+      "min": -40.0,
+      "max": 0.0,
+      "default": -6.0,
+      "scale": "lin",
+      "description": "level of the hum, an octave under the prime"
+    },
+    {
+      "name": "tilt",
+      "unit": "exponent",
+      "min": 0.0,
+      "max": 2.5,
+      "default": 0.6,
+      "scale": "lin",
+      "description": "partial gain ratio**-tilt"
+    },
+    {
+      "name": "decay_s",
+      "unit": "s (T60)",
+      "min": 0.2,
+      "max": 8.0,
+      "default": 3.0,
+      "scale": "log",
+      "description": "decay of the prime"
+    },
+    {
+      "name": "damp",
+      "unit": "exponent",
+      "min": 0.0,
+      "max": 2.0,
+      "default": 0.8,
+      "scale": "lin",
+      "description": "partial decay decay_s / ratio**damp"
+    },
+    {
+      "name": "amp_db",
+      "unit": "dBFS",
+      "min": -60.0,
+      "max": 0.0,
+      "default": -12.0,
+      "scale": "lin",
+      "description": "peak level"
+    },
+    {
+      "name": "onset_s",
+      "unit": "s",
+      "min": 0.0,
+      "max": 0.25,
+      "default": 0.02,
+      "scale": "lin",
+      "description": "start time in the window"
+    },
+    {
+      "name": "attack_s",
+      "unit": "s",
+      "min": 0.0005,
+      "max": 0.05,
+      "default": 0.001,
+      "scale": "log",
+      "description": "linear attack"
+    }
+  ],
+  "date": "12 October 2026"
+}

@@ -1,0 +1,46 @@
+# 12 October 2026: additive_harmonic, twelve harmonics with a spectral tilt in dB per octave, an even harmonic level
+# (odd/even balance: clarinet-like to saw-like), and a decay that shortens with harmonic number. Organ, keys, reeds.
+# FR : douze harmoniques, pente spectrale, équilibre pair impair.
+import math
+
+import torch
+
+from zrmd.audio.bank import Block, db_to_amp, envelope, stft_filter
+from zrmd.audio import fxdsp as F
+from zrmd.audio.fxdsp import param as P
+
+META = {"family": "additive", "kind": "source",
+        "description": "Twelve harmonics with tilt in dB per octave, even harmonic level and harmonic dependent decay. Organs, reeds, keys, generic pitched tones. (12 October 2026)",
+        "tags": ["tonal", "additive", "harmonic", "organ", "reed", "keys"],
+        "sources": [{"what": "additive synthesis", "url": None, "licence": F.SOURCE}],
+        "licence": "original"}
+N_HARM = 12
+
+
+class AdditiveHarmonic(Block):
+    ID = "additive_harmonic"
+    # 12 October 2026 (A2): fit hints measured on the failed cases of the first A2 verification (docs/build/
+    # A2-tonal-effects.md): a larger search budget, and coupled groups for the evolution strategy. FR : indications.
+    FIT = {"scanRounds": 6, "polishRounds": 12, "starts": 12, "screenSamples": 1024,
+           "scanGroups": [["onset_s", "attack_s"], ["tilt_db_oct", "even_db", "amp_db"], ["decay_s", "decay_tilt"], "*"]}
+    PARAMS = [
+        P("f0_hz", "Hz", 40, 3000, 262, "log", "fundamental"),
+        P("tilt_db_oct", "dB per octave", 0.0, 24.0, 6.0, "lin", "spectral slope"),
+        P("even_db", "dB", -40, 0, -6, "lin", "level of the even harmonics"),
+        P("decay_s", "s (T60)", 0.1, 6.0, 1.5, "log", "decay of the fundamental"),
+        P("decay_tilt", "exponent", 0.0, 2.0, 0.5, "lin", "harmonic k decays decay_s / k**decay_tilt"),
+        P("attack_s", "s", 0.001, 0.5, 0.01, "log", "linear attack"),
+        P("amp_db", "dBFS", -60, 0, -12, "lin", "peak level"),
+        P("onset_s", "s", 0.0, 0.25, 0.02, "lin", "start time in the window"),
+    ]
+
+    def synth(self, v, t, sr):
+        ev = db_to_amp(v["even_db"])
+        ks = [float(k) for k in range(1, N_HARM + 1)]
+        gains = [torch.pow(10.0, -v["tilt_db_oct"] * math.log2(k) / 20.0) * (ev if k % 2 == 0 else 1.0) for k in ks]
+        y = F.partials(t, sr, [v["f0_hz"] * k for k in ks], gains, [v["decay_s"] / k ** v["decay_tilt"] for k in ks],
+                       v["onset_s"], v["attack_s"])
+        return F.amp(v) * y / sum(gains)
+
+
+BLOCK = AdditiveHarmonic
